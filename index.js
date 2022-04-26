@@ -1,7 +1,12 @@
+require("dotenv").config();
+
 const express = require("express");
+const path = require("path");
 const app = express();
+const port = process.env.PORT || 3000;
+
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded());
 
 const pokedex = [
@@ -67,15 +72,66 @@ const pokedex = [
   },
 ];
 
+let pokemon = undefined;
+let message = "";
+var pok = 1;
+
+// Rotas de acesso.
 app.get("/", (req, res) => {
-  res.render("index", { pokedex });
-});
-app.post("/add", (req, res) => {
-  const pokemon = req.body;
-  pokedex.push(pokemon);
-  res.redirect("/");
+  setTimeout(() => {
+    message = "";
+  }, 1000);
+  res.render("index", { pokedex, pokemon, message });
 });
 
-app.listen(3000, () =>
-  console.log("Servidor rodando em http://localhost:3000")
+app.get("/cadastrar", (req, res) => {
+  res.render("cadastrar", { pokedex, pokemon });
+});
+
+app.get("/editar", (req, res) => {
+  res.render("editar", { pokedex, pokemon });
+});
+
+app.get("/detalhes", (req, res) => {
+  res.render("detalhes", { pokedex, pok });
+});
+
+app.get("/detalhes/:id", (req, res) => {
+    pok = +req.params.id;
+    res.redirect("/detalhes");
+  });
+
+app.post("/create", (req, res) => {
+  const pokemon = req.body;
+  pokemon.id = pokedex.length + 1;
+  pokedex.push(pokemon);
+  message = "Pokémon cadastrado com sucesso!";
+  res.redirect("/#cards");
+});
+
+app.get("/atualizar/:id", (req, res) => {
+  const id = +req.params.id;
+  pokemon = pokedex.find((pokemon) => pokemon.id === id);
+  res.redirect("/editar");
+});
+
+app.post("/update/:id", (req, res) => {
+  const id = +req.params.id - 1;
+  const newPokemon = req.body;
+  newPokemon.id = id + 1;
+  pokedex[id] = newPokemon;
+  pokemon = undefined;
+  message = "Pokémon atualizado com sucesso!";
+  res.redirect("/#cards");
+});
+
+
+app.get("/delete/:id", (req, res) => {
+  const id = +req.params.id - 1;
+  delete pokedex[id];
+  res.redirect("/#cards");
+});
+
+app.listen(port, () =>
+  console.log(`Servidor rodando em http://localhost:${port}`)
 );

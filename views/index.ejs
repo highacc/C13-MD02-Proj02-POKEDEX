@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+    <h1>POKEDEX</h1>
+    </header>
+
+    <main>
+
+    <section id="cards">
+    <% pokedex.forEach( (pokemon)  => {%>
+        <div class="card">
+            <img src="<%= pokemon.imagem %>" alt="">
+            <h2><%= pokemon.nome%></h2>
+            <p class="tipo">Tipo: <%= pokemon.tipo%></p>
+            <p class="descricao"><%= pokemon.descricao%></p>
+        </div>
+    <% })%>
+    </section>
+    <section id="cadastro">
+        <h2>Cadastro</h2>
+        <form action="/add" method="post">
+
+            <label for="imagem">Link da Imagem:</label>
+            <input type="text" id="imagem" name="imagem">
+
+            <label for="nome">Nome: </label>
+            <input type="text" id="nome" name="nome">
+
+            <label for="tipo">Tipo: </label>
+            <input type="text" id="tipo" name="tipo">
+
+            <label for="descricao">Descrição: </label>
+            <input type="text" id="descricao" name="descricao">
+
+            <label for="numero">Número: </label>
+            <input type="text" id="numero" name="numero">
+
+            <label for="categoria">Categoria: </label>
+            <input type="text" id="categoria" name="categoria">
+
+            
+            <label for="habilidade">Habilidade: </label>
+            <input type="text" id="habilidade" name="habilidade">
+            
+            <label for="peso">Peso: </label>
+            <input type="text" id="peso" name="peso">
+            
+            <label for="altura">Altura: </label>
+            <input type="text" id="altura" name="altura">
+            
+
+            <button id="btnCadastrar" type="submit">Cadastrar</button>
+
+        </form>
+    </section>
+
+</main>
+
+</body>
+</html>

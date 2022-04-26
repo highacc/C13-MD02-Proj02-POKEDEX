@@ -34,11 +34,10 @@
         <div class="card">
           <h3><%= pokemon.nome%></h3>
           <img src="<%= pokemon.imagem %>" alt="imagem do pokemon" />
-          <p class="id">Id: <span id="id"><%= pokemon.id%></span></p>
+          <p class="id">Id: <span id="id"><%= pokemon.numero%></span></p>
           <p class="tipo">Tipo: <span id="tipo"><%= pokemon.tipo%></span></p>
-          <a id="detalhes" href="/detalhes/<%= pokemon.id %>">Detalhes</a>
-          <a id="editar" href="/atualizar/<%= pokemon.id %>">Editar</a>
-          <a id="apagar" href="/delete/<%= pokemon.id %>">Apagar</a>
+          <a id="detalhes" href="/detalhes/<%= pokemon.numero %>">Detalhes</a>
+
         </div>
         <% }) %>
       </section>
@@ -46,7 +45,7 @@
     </main>
 
     <footer>
-      <p>&copy; - Todos os direitos reservados</p>
+      <p>Olavo de Souto &copy; - Todos os direitos reservados</p>
       <p>
         Dados retirados de
         <a target="_blank" href="https://www.pokemon.com/br/pokedex/"

@@ -24,11 +24,11 @@
 
         <h2>Pokémon</h2>
 
-        <% pokedex.forEach((pokemon) => {  if (pokemon.id == pok) {%>
+        
         <div class="card">
           <h3><%= pokemon.nome%></h3>
           <img src="<%= pokemon.imagem %>" alt="imagem do pokemon" />
-          <p class="id">Id: <span id="id"><%= pokemon.id%></span></p>
+          <p class="id">Id: <span id="id"><%= pokemon.numero%></span></p>
           <p class="tipo">Tipo: <span id="tipo"><%= pokemon.tipo%></span></p>
           <p class="descricao">Descrição: <span id="descricao"><%= pokemon.descricao%></span></p>
           <p class="altura">Altura: <span id="altura"><%= pokemon.altura%></span></p>
@@ -36,7 +36,7 @@
           <p class="categoria">Categoria: <span id="categoria"><%= pokemon.categoria%></span></p>
           <p class="habilidade">Habilidade: <span id="habilidade"><%= pokemon.habilidade%></span></p>
         </div>
-        <% } }) %>
+        
       </section>
 
     </main>

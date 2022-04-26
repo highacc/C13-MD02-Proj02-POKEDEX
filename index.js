@@ -88,47 +88,29 @@ app.get("/cadastrar", (req, res) => {
   res.render("cadastrar", { pokedex, pokemon });
 });
 
-app.get("/editar", (req, res) => {
-  res.render("editar", { pokedex, pokemon });
-});
-
 app.get("/detalhes", (req, res) => {
-  res.render("detalhes", { pokedex, pok });
+  res.render("detalhes", { pokedex, pokemon });
 });
 
-app.get("/detalhes/:id", (req, res) => {
-    pok = +req.params.id;
-    res.redirect("/detalhes");
-  });
+app.get("/detalhes/:numero", (req, res) => {
+ /* numero = +req.params.numero;
+  pokemon = pokedex.find(pokemon) => {(pokemon.numero === numero)};*/
+  pokedex.filter((element) => {
+    if (element.numero == req.params.numero) {
+      pokemon = element
+    }
+  })
+  res.render('detalhes.ejs', {
+    pokemon
+  })
+});
+
 
 app.post("/create", (req, res) => {
-  const pokemon = req.body;
-  pokemon.id = pokedex.length + 1;
+  pokemon = req.body;
+  pokemon.numero = pokedex.length + 1;
   pokedex.push(pokemon);
   message = "Pokémon cadastrado com sucesso!";
-  res.redirect("/#cards");
-});
-
-app.get("/atualizar/:id", (req, res) => {
-  const id = +req.params.id;
-  pokemon = pokedex.find((pokemon) => pokemon.id === id);
-  res.redirect("/editar");
-});
-
-app.post("/update/:id", (req, res) => {
-  const id = +req.params.id - 1;
-  const newPokemon = req.body;
-  newPokemon.id = id + 1;
-  pokedex[id] = newPokemon;
-  pokemon = undefined;
-  message = "Pokémon atualizado com sucesso!";
-  res.redirect("/#cards");
-});
-
-
-app.get("/delete/:id", (req, res) => {
-  const id = +req.params.id - 1;
-  delete pokedex[id];
   res.redirect("/#cards");
 });
 

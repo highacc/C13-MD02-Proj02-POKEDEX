@@ -12,7 +12,7 @@ body {
 
 nav {
   background-color: rgb(167, 0, 0);
-  position: fixed;
+  position: top;
   z-index: 9999;
   width: 100%;
   scroll-behavior: smooth;
